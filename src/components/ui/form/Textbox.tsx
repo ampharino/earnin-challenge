@@ -10,9 +10,9 @@ export default function Textbox({
   formRegister?: () => UseFormRegisterReturn;
 }) {
   return (
-    <div>
+    <div className="w-48">
       <input
-        className="p-2 rounded border border-gray-400"
+        className="p-2 w-full rounded border border-gray-400"
         placeholder={placeholder}
         {...formRegister?.()}
       />
