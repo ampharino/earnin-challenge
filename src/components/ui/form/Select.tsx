@@ -6,6 +6,7 @@ import {
   ListboxSelectedOption,
 } from '@headlessui/react';
 import { Control, useController, UseControllerProps } from 'react-hook-form';
+import ErrorMessage from './ErrorMessage';
 
 interface Props {
   options: { value: string; display: string }[];
@@ -54,7 +55,7 @@ export default function Select({
         >
           {listboxOptions}
         </ListboxOptions>
-        {errorMessage && <p className="absolute">{errorMessage}</p>}
+        {errorMessage && <ErrorMessage message={errorMessage} />}
       </Listbox>
     </div>
   );

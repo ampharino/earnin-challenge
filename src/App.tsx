@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ExpenseDialog from './components/ExpenseDialog';
-import Table from './components/Table';
+import ExpenseTable from './components/ExpenseTable';
 import Button from './components/ui/Button';
 
 export interface Expense {
@@ -44,11 +44,11 @@ function App() {
   return (
     <>
       <section className="p-6 max-w-5xl mx-auto">
-        <section className="mb-10">
+        <section className="mb-8 flex gap-x-3">
           <Button onClick={() => setDialogOpen(true)}>Add Expense</Button>
           <Button onClick={deleteExpenses}>Delete Expense</Button>
         </section>
-        <Table expenses={expenses} toggleExpense={toggleExpense} />
+        <ExpenseTable expenses={expenses} toggleExpense={toggleExpense} />
       </section>
       <ExpenseDialog
         onAddExpense={addExpense}

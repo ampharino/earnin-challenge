@@ -27,15 +27,17 @@ const defaultValues: Expense = {
   itemAmount: '',
 } as unknown as Expense;
 
+interface Props {
+  isOpen: boolean;
+  setOpen: (open: boolean) => void;
+  onAddExpense: (expense: Expense) => void;
+}
+
 export default function ExpenseDialog({
   isOpen,
   setOpen,
   onAddExpense,
-}: {
-  isOpen: boolean;
-  setOpen: (open: boolean) => void;
-  onAddExpense: (expense: Expense) => void;
-}) {
+}: Props) {
   const {
     handleSubmit,
     reset,

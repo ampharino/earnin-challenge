@@ -8,8 +8,9 @@ interface Props {
   toggleExpense: (idx: number) => void;
 }
 
-export default function Table({ expenses, toggleExpense }: Props) {
-  const headers = ['Item', 'Category', 'Amount'];
+const headers = ['Item', 'Category', 'Amount'];
+
+export default function ExpenseTable({ expenses, toggleExpense }: Props) {
   const highestSpend = Math.max(
     ...expenses.map(({ itemAmount }) => itemAmount)
   );
