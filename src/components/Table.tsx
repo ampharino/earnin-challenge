@@ -10,6 +10,9 @@ interface Props {
 
 export default function Table({ expenses, toggleExpense }: Props) {
   const headers = ['Item', 'Category', 'Amount'];
+  const highestSpend = Math.max(
+    ...expenses.map(({ itemAmount }) => itemAmount)
+  );
   return (
     <table className="table-fixed border border-gray-400 border-collapse w-full">
       <thead className="border border-gray-400">
@@ -21,20 +24,27 @@ export default function Table({ expenses, toggleExpense }: Props) {
         </tr>
       </thead>
       <tbody>
-        {expenses.map((expense, idx) => (
-          <tr key={idx}>
-            <td className="px-1 text-center border border-gray-400">
-              <Checkbox
-                defaultChecked={false}
-                onChange={() => toggleExpense(idx)}
-                className="size-4 flex border border-gray-400 justify-self-center data-[checked]:bg-purple-700"
-              />
-            </td>
-            <BodyCell>{expense.itemName}</BodyCell>
-            <BodyCell>{expense.category}</BodyCell>
-            <BodyCell>{`${expense.itemAmount}$`}</BodyCell>
-          </tr>
-        ))}
+        {expenses.map((expense, idx) => {
+          return (
+            <tr
+              key={idx}
+              className={
+                expense.itemAmount === highestSpend ? 'bg-green-200' : ''
+              }
+            >
+              <td className="px-1 text-center border border-gray-400">
+                <Checkbox
+                  defaultChecked={false}
+                  onChange={() => toggleExpense(idx)}
+                  className="size-4 flex border border-gray-400 justify-self-center data-[checked]:bg-purple-700"
+                />
+              </td>
+              <BodyCell>{expense.itemName}</BodyCell>
+              <BodyCell>{expense.category}</BodyCell>
+              <BodyCell>{`${expense.itemAmount}$`}</BodyCell>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

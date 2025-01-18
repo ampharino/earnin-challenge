@@ -45,7 +45,7 @@ export default function ExpenseDialog({
   } = useForm<Expense>({ defaultValues });
 
   const onSubmit = handleSubmit((data) => {
-    onAddExpense(data);
+    onAddExpense({ ...data, itemAmount: Number(data.itemAmount) });
     closeDialog();
   });
 
