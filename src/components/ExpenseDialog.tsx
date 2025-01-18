@@ -4,12 +4,7 @@ import Button from './ui/Button';
 import Textbox from './ui/form/Textbox';
 import Select from './ui/form/Select';
 import { useEffect, useState } from 'react';
-
-interface FormData {
-  itemName: string;
-  category: string;
-  itemAmount: number;
-}
+import type { Expense } from '../App';
 
 const options = [
   {
@@ -29,18 +24,24 @@ const options = [
 export default function ExpenseDialog({
   isOpen,
   setOpen,
+  onAddExpense,
 }: {
   isOpen: boolean;
   setOpen: (open: boolean) => void;
+  onAddExpense: (expense: Expense) => void;
 }) {
   const {
     handleSubmit,
     reset,
     register,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<Expense>();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) => {
+    onAddExpense(data);
+    setOpen(false);
+    reset();
+  });
 
   const [fact, setFact] = useState('');
 
@@ -99,6 +100,7 @@ export default function ExpenseDialog({
                 <label>Item:</label>
                 <Textbox
                   placeholder="Item amount"
+                  type="number"
                   errorMessage={errors.itemAmount?.message}
                   formRegister={() =>
                     register('itemAmount', {
