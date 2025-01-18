@@ -45,7 +45,7 @@ export default function Select({
         <ListboxButton className="rounded border border-gray-400 w-full">
           <ListboxSelectedOption
             options={listboxOptions}
-            placeholder={<div className="p-2">{placeholder}</div>}
+            placeholder={<div className="p-2 text-start">{placeholder}</div>}
           />
         </ListboxButton>
         <ListboxOptions

@@ -5,9 +5,10 @@ import type { Expense } from '../App';
 
 interface Props {
   expenses: Expense[];
+  toggleExpense: (idx: number) => void;
 }
 
-export default function Table({ expenses }: Props) {
+export default function Table({ expenses, toggleExpense }: Props) {
   const headers = ['Item', 'Category', 'Amount'];
   return (
     <table className="table-fixed border border-gray-400 border-collapse w-full">
@@ -23,7 +24,11 @@ export default function Table({ expenses }: Props) {
         {expenses.map((expense, idx) => (
           <tr key={idx}>
             <td className="px-1 text-center border border-gray-400">
-              <Checkbox className="size-4 flex border border-gray-400 justify-self-center" />
+              <Checkbox
+                defaultChecked={false}
+                onChange={() => toggleExpense(idx)}
+                className="size-4 flex border border-gray-400 justify-self-center data-[checked]:bg-purple-700"
+              />
             </td>
             <BodyCell>{expense.itemName}</BodyCell>
             <BodyCell>{expense.category}</BodyCell>
