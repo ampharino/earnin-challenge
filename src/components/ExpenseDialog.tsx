@@ -63,7 +63,6 @@ export default function ExpenseDialog({
       try {
         const response = await fetch('https://catfact.ninja/fact');
         const factJson = await response.json();
-        console.log('success');
         setFact(factJson.fact);
       } catch (_e) {
         setFact(
