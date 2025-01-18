@@ -71,8 +71,8 @@ export default function ExpenseDialog({
     >
       <DialogBackdrop className="bg-black/30 fixed inset-0 z-10" />
       <div className="fixed inset-0 z-20 flex items-center justify-center p-6">
-        <DialogPanel className="max-w-3xl w-full bg-white flex gap-x-8  py-4 px-6">
-          <section className="w-1/2">
+        <DialogPanel className="max-w-3xl w-full bg-white flex-col md:flex-row flex gap-x-8  py-4 px-6">
+          <section className="md:w-1/2">
             <form onSubmit={onSubmit} className="flex flex-col gap-y-6">
               <div className="flex items-center justify-between">
                 <label>Item:</label>
@@ -116,7 +116,7 @@ export default function ExpenseDialog({
               </div>
             </form>
           </section>
-          <section className="w-1/2 italic text-purple-700">
+          <section className="md:w-1/2 italic text-purple-700">
             <h3 className="font-bold ">Random cat fact:</h3>
             <p>{fact}</p>
           </section>
