@@ -21,6 +21,12 @@ const options = [
   },
 ];
 
+const defaultValues: Expense = {
+  itemName: '',
+  category: undefined,
+  itemAmount: '',
+} as unknown as Expense;
+
 export default function ExpenseDialog({
   isOpen,
   setOpen,
@@ -36,13 +42,17 @@ export default function ExpenseDialog({
     register,
     formState: { errors },
     control,
-  } = useForm<Expense>();
+  } = useForm<Expense>({ defaultValues });
 
   const onSubmit = handleSubmit((data) => {
     onAddExpense(data);
-    setOpen(false);
-    reset();
+    closeDialog();
   });
+
+  const closeDialog = () => {
+    setOpen(false);
+    reset(defaultValues);
+  };
 
   const [fact, setFact] = useState('');
 
@@ -64,13 +74,7 @@ export default function ExpenseDialog({
   }, [isOpen]);
 
   return (
-    <Dialog
-      open={isOpen}
-      onClose={() => {
-        setOpen(false);
-        reset();
-      }}
-    >
+    <Dialog open={isOpen} onClose={closeDialog}>
       <DialogBackdrop className="bg-black/30 fixed inset-0 z-10" />
       <div className="fixed inset-0 z-20 flex items-center justify-center p-6">
         <DialogPanel className="max-w-3xl w-full bg-white flex-col md:flex-row flex gap-x-8  py-4 px-6">
@@ -107,8 +111,8 @@ export default function ExpenseDialog({
                     register('itemAmount', {
                       required: 'This field is required',
                       min: {
-                        value: 0,
-                        message: 'The amount must not be negative',
+                        value: 1,
+                        message: 'The amount must be more than 1',
                       },
                     })
                   }

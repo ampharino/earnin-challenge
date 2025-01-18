@@ -32,7 +32,7 @@ export default function Select({
   });
   const listboxOptions = options.map(({ value, display }) => (
     <ListboxOption
-      className="data-[focus]:bg-purple-600 data-[focus]:text-white p-2 rounded"
+      className="data-[focus]:bg-purple-600 data-[focus]:text-white p-2 rounded text-start"
       key={value}
       value={value}
     >
