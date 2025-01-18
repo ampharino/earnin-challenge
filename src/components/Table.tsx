@@ -24,10 +24,10 @@ export default function Table({ expenses, toggleExpense }: Props) {
         </tr>
       </thead>
       <tbody>
-        {expenses.map((expense, idx) => {
+        {expenses.map((expense) => {
           return (
             <tr
-              key={idx}
+              key={expense.id}
               className={
                 expense.itemAmount === highestSpend ? 'bg-green-200' : ''
               }
@@ -35,7 +35,7 @@ export default function Table({ expenses, toggleExpense }: Props) {
               <td className="px-1 text-center border border-gray-400">
                 <Checkbox
                   defaultChecked={false}
-                  onChange={() => toggleExpense(idx)}
+                  onChange={() => toggleExpense(expense.id)}
                   className="size-4 flex border border-gray-400 justify-self-center data-[checked]:bg-purple-700"
                 />
               </td>
