@@ -7,6 +7,7 @@ import Select from './ui/form/Select';
 interface FormData {
   itemName: string;
   category: string;
+  itemAmount: number;
 }
 
 const options = [
@@ -77,7 +78,23 @@ export default function ExpenseDialog({
                   }
                 ></Select>
               </div>
-              <div className="mt-8">
+              <div className="flex items-center justify-between">
+                <label>Item:</label>
+                <Textbox
+                  placeholder="Item amount"
+                  errorMessage={errors.itemAmount?.message}
+                  formRegister={() =>
+                    register('itemAmount', {
+                      required: 'This field is required',
+                      min: {
+                        value: 0,
+                        message: 'The amount must not be negative',
+                      },
+                    })
+                  }
+                ></Textbox>
+              </div>
+              <div className="mt-8 flex justify-end">
                 <Button type="submit">Submit</Button>
               </div>
             </form>
