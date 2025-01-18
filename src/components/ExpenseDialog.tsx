@@ -35,6 +35,7 @@ export default function ExpenseDialog({
     reset,
     register,
     formState: { errors },
+    control,
   } = useForm<Expense>();
 
   const onSubmit = handleSubmit((data) => {
@@ -91,9 +92,9 @@ export default function ExpenseDialog({
                   options={options}
                   placeholder="Category"
                   errorMessage={errors.category?.message}
-                  formRegister={() =>
-                    register('category', { required: 'This field is required' })
-                  }
+                  name="category"
+                  formControl={control}
+                  rules={{ required: 'This field is required' }}
                 ></Select>
               </div>
               <div className="flex items-center justify-between">
