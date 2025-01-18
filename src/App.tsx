@@ -11,10 +11,9 @@ export interface Expense {
 }
 
 function App() {
-  const [expenseCount, setExpenseCount] = useState(0);
   const [isDialogOpen, setDialogOpen] = useState(false);
+  const [expenseCount, setExpenseCount] = useState(0);
   const [expenses, setExpenses] = useState<Expense[]>([]);
-  const [selectedExpenseIds, setSelectedExpenseIds] = useState<number[]>([]);
   const addExpense = (expense: Expense) => {
     const id = expenseCount + 1;
     setExpenses((prev) => [
@@ -28,6 +27,7 @@ function App() {
     ]);
     setExpenseCount(id);
   };
+  const [selectedExpenseIds, setSelectedExpenseIds] = useState<number[]>([]);
   const deleteExpenses = () => {
     setExpenses((prev) => {
       return prev.filter((expense) => !selectedExpenseIds.includes(expense.id));
