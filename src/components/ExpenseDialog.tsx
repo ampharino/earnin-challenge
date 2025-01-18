@@ -105,7 +105,7 @@ export default function ExpenseDialog({
                 ></Select>
               </div>
               <div className="flex items-center justify-between">
-                <label>Item:</label>
+                <label>Amount:</label>
                 <Textbox
                   placeholder="Item amount"
                   type="number"
