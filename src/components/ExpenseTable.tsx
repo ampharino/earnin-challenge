@@ -25,27 +25,35 @@ export default function ExpenseTable({ expenses, toggleExpense }: Props) {
         </tr>
       </thead>
       <tbody>
-        {expenses.map((expense) => {
-          return (
-            <tr
-              key={expense.id}
-              className={
-                expense.itemAmount === highestSpend ? 'bg-green-200' : ''
-              }
-            >
-              <td className="px-1 text-center border border-gray-400">
-                <Checkbox
-                  defaultChecked={false}
-                  onChange={() => toggleExpense(expense.id)}
-                  className="size-4 flex border border-gray-400 justify-self-center data-[checked]:bg-purple-700"
-                />
-              </td>
-              <BodyCell>{expense.itemName}</BodyCell>
-              <BodyCell>{expense.category}</BodyCell>
-              <BodyCell>{`${expense.itemAmount}$`}</BodyCell>
-            </tr>
-          );
-        })}
+        {expenses.length ? (
+          expenses.map((expense) => {
+            return (
+              <tr
+                key={expense.id}
+                className={
+                  expense.itemAmount === highestSpend ? 'bg-green-200' : ''
+                }
+              >
+                <td className="px-1 text-center border border-gray-400">
+                  <Checkbox
+                    defaultChecked={false}
+                    onChange={() => toggleExpense(expense.id)}
+                    className="size-4 flex border border-gray-400 justify-self-center data-[checked]:bg-purple-700"
+                  />
+                </td>
+                <BodyCell>{expense.itemName}</BodyCell>
+                <BodyCell>{expense.category}</BodyCell>
+                <BodyCell>{`${expense.itemAmount}$`}</BodyCell>
+              </tr>
+            );
+          })
+        ) : (
+          <tr>
+            <td className="text-center p-4 font-bold" colSpan={4}>
+              No expenses yet. Click 'Add Expense' to get started.
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );
