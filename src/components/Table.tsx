@@ -1,5 +1,5 @@
 import { Checkbox } from '@headlessui/react';
-import HeaderColumn from './components/table/header/Column';
+import HeaderColumn from './ui/table/header/Column';
 
 export default function Table() {
   const headers = ['Item', 'Category', 'Amount'];
@@ -8,8 +8,8 @@ export default function Table() {
       <thead className="border border-gray-400">
         <tr>
           <th></th>
-          {headers.map((text) => {
-            return <HeaderColumn text={text} />;
+          {headers.map((text, idx) => {
+            return <HeaderColumn key={idx} text={text} />;
           })}
         </tr>
       </thead>
