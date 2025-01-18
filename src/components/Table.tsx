@@ -27,7 +27,7 @@ export default function Table({ expenses }: Props) {
             </td>
             <BodyCell>{expense.itemName}</BodyCell>
             <BodyCell>{expense.category}</BodyCell>
-            <BodyCell>{expense.itemAmount}</BodyCell>
+            <BodyCell>{`${expense.itemAmount}$`}</BodyCell>
           </tr>
         ))}
       </tbody>
