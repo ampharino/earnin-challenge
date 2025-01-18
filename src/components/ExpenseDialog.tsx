@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import Button from './ui/Button';
 import Textbox from './ui/form/Textbox';
 import Select from './ui/form/Select';
+import { useEffect, useState } from 'react';
 
 interface FormData {
   itemName: string;
@@ -41,6 +42,25 @@ export default function ExpenseDialog({
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
+  const [fact, setFact] = useState('');
+
+  useEffect(() => {
+    async function fetchCatFact() {
+      try {
+        const response = await fetch('https://catfact.ninja/fact');
+        const factJson = await response.json();
+        setFact(factJson.fact);
+      } catch (_e) {
+        setFact(
+          'We are sorry, we could not fetch a cat fact at this moment :('
+        );
+      }
+    }
+    if (isOpen) {
+      fetchCatFact();
+    }
+  }, [isOpen]);
+
   return (
     <Dialog
       open={isOpen}
@@ -51,12 +71,9 @@ export default function ExpenseDialog({
     >
       <DialogBackdrop className="bg-black/30 fixed inset-0 z-10" />
       <div className="fixed inset-0 z-20 flex items-center justify-center p-6">
-        <DialogPanel className="max-w-3xl w-full bg-white flex">
+        <DialogPanel className="max-w-3xl w-full bg-white flex gap-x-8  py-4 px-6">
           <section className="w-1/2">
-            <form
-              onSubmit={onSubmit}
-              className="flex flex-col py-4 px-6 gap-y-6"
-            >
+            <form onSubmit={onSubmit} className="flex flex-col gap-y-6">
               <div className="flex items-center justify-between">
                 <label>Item:</label>
                 <Textbox
@@ -99,7 +116,10 @@ export default function ExpenseDialog({
               </div>
             </form>
           </section>
-          <section>Random cat fact</section>
+          <section className="w-1/2 italic text-purple-700">
+            <h3 className="font-bold ">Random cat fact:</h3>
+            <p>{fact}</p>
+          </section>
         </DialogPanel>
       </div>
     </Dialog>
