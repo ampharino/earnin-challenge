@@ -28,7 +28,6 @@ export default function Select({
   const { field } = useController({
     name,
     rules,
-    defaultValue: null,
     control: formControl,
   });
   const listboxOptions = options.map(({ value, display }) => (

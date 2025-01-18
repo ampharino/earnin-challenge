@@ -23,7 +23,7 @@ const options = [
 
 const defaultValues: Expense = {
   itemName: '',
-  category: undefined,
+  category: null,
   itemAmount: '',
 } as unknown as Expense;
 
